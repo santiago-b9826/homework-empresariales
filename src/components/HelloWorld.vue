@@ -1,10 +1,11 @@
 <template>
-  <div class="hello">
-    <h1>{{ msg }}</h1>
+  <div class="">
+    <input type="text" placeholder="Product" v-model="product">
+    <input type="submit" value="Search" @click="searchProduct">
     <div v-for="item in items" :key=item>
-      {{ item.title }} ||
-      {{ item.thumbnail }} ||
-      {{ item.price }}
+      <h1>{{ item.title }}</h1>
+      <p>{{ item.price }}</p>
+      <img :src="item.thumbnail" :alt="item.title">
     </div>
   </div>
 </template>
@@ -16,16 +17,16 @@ export default {
   name: 'HelloWorld',
   data () {
     return {
+      product: '',
       items: []
     }
   },
-  mounted () {
-    axios
-      .get('https://api.mercadolibre.com/sites/MCO/search?q=play')
-      .then(response => (this.items = response.data.results))
-  },
-  props: {
-    msg: String
+  methods: {
+    searchProduct: function (e) {
+      axios
+        .get(`https://api.mercadolibre.com/sites/MCO/search?q=${this.product}&limit=5`)
+        .then(response => (this.items = response.data.results))
+    }
   }
 }
 </script>
