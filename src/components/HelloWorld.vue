@@ -3,8 +3,8 @@
     <input type="text" placeholder="Product" v-model="product">
     <input type="submit" value="Search" @click="searchProduct">
     <div v-for="item in items" :key=item>
-      <h1>{{ item.title }}</h1>
-      <p>{{ item.price }}</p>
+      <h3>{{ item.title }}</h3>
+      <p>Precio:${{ item.price }}</p>
       <img :src="item.thumbnail" :alt="item.title">
     </div>
   </div>
